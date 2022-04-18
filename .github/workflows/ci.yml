@@ -1,0 +1,23 @@
+name: GitHub Actions CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  tests:
+    name: example earthly test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: kevinschoonover/actions-setup@ddca0c88227f53248a8d94d601a6804ef170b4b2
+        with:
+          version: "latest" # or pin to an specific version, e.g. "v0.6.10"
+      - uses: actions/checkout@v2
+      - name: Docker login # to avoid dockerhub rate-limiting
+        run: docker login --username "${{ secrets.DOCKERHUB_USERNAME }}" --password "${{ secrets.DOCKERHUB_PASSWORD }}"
+      - name: what version is installed?
+        run: earthly --version
+      - name: run the earthly hello world
+        run: earthly github.com/earthly/hello-world:main+hello
