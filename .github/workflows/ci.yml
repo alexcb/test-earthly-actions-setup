@@ -11,7 +11,7 @@ jobs:
     name: example earthly test
     runs-on: ubuntu-latest
     steps:
-      - uses: kevinschoonover/actions-setup@ddca0c88227f53248a8d94d601a6804ef170b4b2
+      - uses: earthly/actions-setup@4ebeff879ccb4fbf8349c25d85f2c10dd884a6b8
         with:
           version: "latest" # or pin to an specific version, e.g. "v0.6.10"
       - uses: actions/checkout@v2
